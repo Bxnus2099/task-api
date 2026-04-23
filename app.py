@@ -107,7 +107,7 @@ def external_tasks():
 
     try:
         # เปลี่ยน URL เป็นของเพื่อน
-        res = requests.get("https://friend-api.com/tasks", timeout=3)
+        res = requests.get("https://mini-task-api-bnm4.onrender.com/tasks", timeout=3)
         external = res.json()
     except:
         external = {"error": "Cannot connect"}
