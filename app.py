@@ -86,9 +86,11 @@ def create_task():
         }), 400
 
     new_task = {
-        "id": len(tasks) + 1,
-        "title": data["title"],
-        "status": data.get("status", "pending")
+    "id": len(tasks) + 1,
+    "title": data["title"],
+    "status": data.get("status", "pending"),
+    "priority": data.get("priority", "medium"),
+    "due_date": data.get("due_date", None)
     }
 
     tasks.append(new_task)
