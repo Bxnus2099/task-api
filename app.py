@@ -38,9 +38,8 @@ tasks = [
     }
 ]
 
-# -----------------------------
-# 🔐 LOGIN
-# -----------------------------
+
+# LOGIN
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -69,9 +68,7 @@ def login():
     }), 401
 
 
-# -----------------------------
-# 🔐 TOKEN CHECK
-# -----------------------------
+# TOKEN CHECK
 def verify_token(req):
     auth = req.headers.get("Authorization")
 
@@ -86,9 +83,7 @@ def verify_token(req):
         return None, ("Invalid token", 401)
 
 
-# -----------------------------
-# 📋 GET TASKS (PRIVATE)
-# -----------------------------
+#  GET TASKS (PRIVATE)
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     user, error = verify_token(request)
@@ -98,9 +93,7 @@ def get_tasks():
     return jsonify({"tasks": tasks})
 
 
-# -----------------------------
-# ➕ CREATE TASK
-# -----------------------------
+# CREATE TASK
 @app.route('/tasks', methods=['POST'])
 def create_task():
     user, error = verify_token(request)
@@ -130,17 +123,13 @@ def create_task():
     return jsonify({"message": "Task created"})
 
 
-# -----------------------------
-# 🌐 PUBLIC TASKS (สำคัญมาก!)
-# -----------------------------
+# PUBLIC TASKS (สำคัญมาก!)
 @app.route('/public-tasks', methods=['GET'])
 def public_tasks():
     return jsonify({"tasks": tasks})
 
 
-# -----------------------------
-# 🔗 EXTERNAL API
-# -----------------------------
+# EXTERNAL API
 @app.route('/external-tasks', methods=['GET'])
 def external_tasks():
     user, error = verify_token(request)
@@ -176,10 +165,16 @@ def external_tasks():
         "external_tasks": external_all
     })
 
+@app.errorhandler(500)
+def internal_error(e):
+    return jsonify({
+        "status": "error",
+        "code": 500,
+        "message": "Internal server error"
+    }), 500
 
-# -----------------------------
-# 🚀 RUN (Deploy)
-# -----------------------------
+
+#  RUN (Deploy)
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
