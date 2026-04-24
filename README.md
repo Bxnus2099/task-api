@@ -69,7 +69,7 @@ http://localhost:5000
 }
 ```
 
- **สำคัญ:** ต้อง copy token ไปใช้ในทุก API ที่ต้อง authentication
+ **สำคัญ:** ต้อง copy token ไปใช้ในทุก API เพื่อต้องยืนยันตัวตน = Authorization
 
 ---
 
