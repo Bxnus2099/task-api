@@ -1,58 +1,105 @@
-# Mini Task Management API
+# Task API Mini Project
 
-## 1. Overview (ระบบนี้คืออะไร)
+## 1. ภาพรวม (Overview)
 
-Mini Task Management API เป็น RESTful API ที่พัฒนาด้วย Flask โดยมีวัตถุประสงค์เพื่อใช้ในการจัดการรายการงาน (Task Management) ภายในระบบ ผู้ใช้งานสามารถสร้าง, ดูและจัดการงานของตนเองได้ผ่าน API
+โปรเจค Task API Mini Project เป็นระบบ RESTful API ที่พัฒนาด้วยภาษา Python และใช้ Flask Framework สำหรับจัดการรายการงาน (Task Management) โดยระบบนี้ออกแบบมาเพื่อให้ผู้ใช้งานสามารถเพิ่มและดูรายการงานของตนเองได้ผ่าน API
 
-ระบบนี้มีการใช้ JWT (JSON Web Token) สำหรับการยืนยันตัวตนว่าเราเป็นใคร เพื่อรักษาความปลอดภัยของข้อมูลและควบคุมการเข้าถึง Endpointต่างๆ นอกจากนี้ยังสามารถเชื่อมต่อกับ API ของผู้ใช้งานอื่น (External API Integration) เพื่อดึงข้อมูล Task จากระบบภายนอกมารวมแสดงผลได้ใน Endpoint เดียว
+นอกจากนี้ ระบบยังมีการใช้ JWT (JSON Web Token) สำหรับการยืนยันตัวตน (Authentication) เพื่อควบคุมการเข้าถึงข้อมูล และเพิ่มความปลอดภัยในการใช้งาน อีกทั้งยังรองรับการเชื่อมต่อกับ API ของผู้ใช้งานอื่น (External API Integration) เพื่อดึงข้อมูล Task จากภายนอกมารวมแสดงผลได้ในระบบเดียว
 
----
-
-## Tools & Technologies
-
-* Python 3
-* Flask
-* PyJWT
-* Requests
-* Postman
-* Render
+ระบบนี้แสดงให้เห็นถึงแนวคิดสำคัญในการพัฒนา Web API ได้แก่ การออกแบบ Endpoint, การจัดการ Request และ Response, การทำการยืนยันตัวตนว่าเราเป็นใคร Authentication, การจัดการข้อผิดพลาด (Error Handling) และการเชื่อมต่อระหว่างระบบ (System Integration)
 
 ---
 
-## 2. How to Run (วิธีติดตั้งและรัน)
+## 2. ฟีเจอร์หลัก (Features)
 
-### 1. Clone โปรเจค
+ระบบมีความสามารถหลักดังนี้:
+
+* รองรับการ Login และยืนยันตัวตนด้วย JWT
+* สามารถดูรายการ Task (ต้องใช้ Token)
+* สามารถเพิ่ม Task ใหม่เข้าสู่ระบบ
+* รองรับ Public API สำหรับดู Task โดยไม่ต้องใช้ Token
+* สามารถเชื่อมต่อและดึงข้อมูลจาก API ของเพื่อน
+* มีระบบจัดการ Error เช่น 400, 401 และ 500
+
+---
+
+## 3. เทคโนโลยีที่ใช้ (Technology Stack)
+
+โปรเจคนี้พัฒนาด้วยเครื่องมือและเทคโนโลยีดังนี้:
+
+* Python 3 — ภาษาหลักในการพัฒนา
+* Flask — ใช้สร้าง RESTful API
+* PyJWT — ใช้สำหรับสร้างและตรวจสอบ Token
+* Requests — ใช้สำหรับเรียก External API
+* JSON ผ่าน HTTP — ใช้สำหรับส่งข้อมูลระหว่างระบบ
+
+---
+
+## 4. วิธีใช้งาน (How to Run)
+
+เริ่มต้นใช้งานระบบสามารถทำตามขั้นตอนดังนี้:
+
+### 4.1 Clone โปรเจค
+
+เปิด Command Prompt หรือ Terminal แล้วรันคำสั่ง:
 
 ```bash
 git clone https://github.com/Bxnus2099/task-api.git
 cd task-api
 ```
 
-### 2. ติดตั้ง dependencies
+### 4.2 ติดตั้ง Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run server
+### 4.3 รันเซิร์ฟเวอร์
 
 ```bash
 python app.py
 ```
 
-### 4. Server จะรันที่
+หลังจากรันสำเร็จ ระบบจะสามารถเรียกใช้งานผ่าน:
 
+```
 http://localhost:5000
+```
 
 ---
 
-##  3. วิธีการใช้งาน (How to Use API)
+### 4.4 อัปโหลดขึ้น GitHub และ Deploy
 
-### Step 1: Login เพื่อรับ Token
+หลังจากพัฒนาเสร็จ สามารถนำระบบขึ้นใช้งานจริงได้โดย:
 
-* Method: **POST**
-* URL: `/login`
-* Body (JSON):
+1. push โค้ดขึ้น GitHub
+2. ไปที่เว็บไซต์ Render (https://render.com)
+3. เลือก New → Web Service
+4. เชื่อมต่อกับ Repository ของเรา (task-api)
+5. ตั้งค่า:
+
+   * Build Command: `pip install -r requirements.txt`
+   * Start Command: `python app.py`
+
+เมื่อ Deploy สำเร็จ ระบบจะได้ URL เช่น:
+
+```
+https://your-api.onrender.com
+```
+
+ซึ่งสามารถนำไปใช้ใน Postman ได้ทันที
+
+---
+
+## 5. การยืนยันตัวตน (Authentication)
+
+ผู้ใช้งานต้องทำการ Login เพื่อรับ Token ก่อนใช้งาน API
+
+```http
+POST /login
+```
+
+ตัวอย่าง Request:
 
 ```json
 {
@@ -61,7 +108,7 @@ http://localhost:5000
 }
 ```
 
- ผลลัพธ์:
+Response:
 
 ```json
 {
@@ -69,15 +116,7 @@ http://localhost:5000
 }
 ```
 
- **สำคัญ:** ต้อง copy token ไปใช้ในทุก API เพื่อต้องยืนยันตัวตน = Authorization
-
----
-
-### Step 2: ใส่ Token ใน Header
-
-ใน Postman ให้ไปที่ **Authorization → Bearer Token**
-
-หรือใส่ใน Header:
+จากนั้นให้นำ Token ไปใส่ใน Header:
 
 ```
 Authorization: Bearer <token>
@@ -85,37 +124,61 @@ Authorization: Bearer <token>
 
 ---
 
-### Step 3: ดู Task ของตัวเอง
+## 6. API Endpoints
 
-* Method: **GET**
-* URL: `/tasks`
+ระบบประกอบด้วย Endpoint หลักดังนี้:
 
- Response:
+* `POST /login` → ใช้สำหรับ Login
+* `GET /tasks` → ดู Task (ต้องใช้ Token)
+* `POST /tasks` → เพิ่ม Task (ต้องใช้ Token)
+* `GET /public-tasks` → ดู Task แบบ Public
+* `GET /external-tasks` → ดึง Task จาก API ของเพื่อน
+
+---
+
+## 7.  ตัวอย่าง Request และ Response
+
+### Login
 
 ```json
 {
-  "tasks": [...]
+  "username": "your_username",
+  "password": "your_password"
 }
 ```
 
 ---
 
-### Step 4: เพิ่ม Task
-
-* Method: **POST**
-* URL: `/tasks`
-* Body (JSON):
+### ดู Task
 
 ```json
 {
-  "title": "อ่านหนังสือ",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "ทำ Homework วิชา IE322",
+      "status": "pending",
+      "priority": "high",
+      "due_date": "2026-04-30"
+    }
+  ]
+}
+```
+
+---
+
+### เพิ่ม Task
+
+```json
+{
+  "title": "อ่านหนังสือสอบ",
   "status": "pending",
   "priority": "medium",
   "due_date": "2026-05-01"
 }
 ```
 
- Response:
+Response:
 
 ```json
 {
@@ -125,54 +188,20 @@ Authorization: Bearer <token>
 
 ---
 
-### Step 5: ดู Task แบบ Public
-
-* Method: **GET**
-* URL: `/public-tasks`
-
- ใช้สำหรับให้เพื่อนเรียกข้อมูลของเรา
-
----
-
-### Step 6: ดึง Task ของเพื่อน (External API)
-
-* Method: **GET**
-* URL: `/external-tasks`
-
- Response:
+### Error (400)
 
 ```json
 {
-  "Bonus_Tasks": [...],
-  "external_tasks": {
-    "Tangmo": [...],
-    "Cream": [...]
+  "error": {
+    "code": 400,
+    "message": "Title is required"
   }
 }
 ```
 
-Endpoint นี้จะรวม:
-
-* Task ของตัวเอง
-* Task ของเพื่อน
-
 ---
 
-## 4. Endpoints
-
-| Method | Endpoint        | Description |
-| ------ | --------------- | ----------- |
-| POST   | /login          | Login       |
-| GET    | /tasks          | ดู Task     |
-| POST   | /tasks          | เพิ่ม Task  |
-| GET    | /public-tasks   | Public Task |
-| GET    | /external-tasks | รวม Task    |
-
----
-
-## 5. Error Examples
-
-### 401 Unauthorized
+### Error (401)
 
 ```json
 {
@@ -183,7 +212,9 @@ Endpoint นี้จะรวม:
 }
 ```
 
-### 500 Internal Server Error
+---
+
+### Error (500)
 
 ```json
 {
@@ -195,17 +226,48 @@ Endpoint นี้จะรวม:
 
 ---
 
-## Notes
+## 8. ขั้นตอนการทำงานของ Integration
+การทำงานของ External API มีขั้นตอนดังนี้:
 
-* ต้อง Login ก่อนใช้งาน API
-* ต้องใช้ Token กับทุก endpoint (ยกเว้น public)
-* External API ต้องมี `/public-tasks`
-* ใช้ JSON เท่านั้น
+1. ระบบส่ง request ไปยัง API ของเพื่อน
+2. รับข้อมูล JSON กลับมา
+3. ตรวจสอบรูปแบบข้อมูล
+4. รวมข้อมูลกับ Task ของตัวเอง
+5. ส่งผลลัพธ์กลับไปยังผู้ใช้งาน
 
 ---
 
-## Author
+## 9. HTTP Status Codes ที่ใช้
 
-* Name: BOONYANAT PUVICJITSUTIN
-* Course: IE322 338B
-* Project: Mini Task Management API
+* 200 OK
+* 400 Bad Request
+* 401 Unauthorized
+* 500 Internal Server Error
+
+---
+
+## 10. การจัดการ Error
+ระบบรองรับการจัดการ Error และส่งกลับในรูปแบบ JSON เพื่อให้ผู้ใช้งานเข้าใจได้ง่าย
+
+---
+
+## 11. ความปลอดภัย (Security)
+* ใช้ JWT สำหรับ Authentication
+* Token มีวันหมดอายุ
+* ใช้ HTTPS เมื่อ Deploy จริง
+* ห้ามใส่ข้อมูลส่วนตัวเช่นรหัส API หรือ Token ลง Github
+
+---
+
+## 12. สิ่งที่สามารถพัฒนาต่อได้
+
+* เพิ่มฐานข้อมูล เช่น MySQL หรือ MongoDB
+* เพิ่มฟีเจอร์ Update และ Delete Task
+* เพิ่มระบบสมัครสมาชิก (Register)
+
+---
+
+## ผู้จัดทำ
+- Name: BOONYANAT PUVICJITSUTIN
+- Course: (ชื่อวิชา เช่น IE322)
+- Project: Mini Task Management API
