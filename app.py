@@ -161,7 +161,7 @@ def external_tasks():
             external_all[name] = {"error": f"Cannot connect to {url}"}
 
     return jsonify({
-        "my_tasks": tasks,
+        "Bonus_Tasks": tasks,
         "external_tasks": external_all
     })
 
