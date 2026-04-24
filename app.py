@@ -106,8 +106,8 @@ def external_tasks():
         return jsonify({"error": {"code": error[1], "message": error[0]}}), error[1]
 
     friend_apis = [
-        "https://mini-task-api-v2.onrender.com/tasks",
-        "https://friend2-api.onrender.com/tasks"
+        "https://mini-task-api-v2.onrender.com/",
+        "https://flask-api-mini.onrender.com/"
     ]
 
     external_all = []
