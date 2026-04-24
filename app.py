@@ -127,7 +127,7 @@ def external_tasks():
 
     friend_apis = {
         "Tangmo": "https://mini-task-api-v2.onrender.com/public-tasks",
-        "Cream": "https://flask-api-mini.onrender.com/public-tasks"
+        "Cream": "https://flask-api-mini-1.onrender.com/public-tasks"
     }
 
     external_all = {}
