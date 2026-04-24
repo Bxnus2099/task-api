@@ -106,8 +106,8 @@ def external_tasks():
         return jsonify({"error": {"code": error[1], "message": error[0]}}), error[1]
 
     friend_apis = {
-        "friend1": "https://mini-task-api-v2.onrender.com/public-tasks",
-        "friend2": "https://flask-api-mini.onrender.com/public-tasks"
+        "Tangmo": "https://mini-task-api-v2.onrender.com/public-tasks",
+        "Cream": "https://flask-api-mini.onrender.com/public-tasks"
     }
 
     external_all = {}
@@ -119,6 +119,10 @@ def external_tasks():
         except:
             external_all[name] = {"error": f"Cannot connect to {url}"}
 
+    return jsonify({
+        "my_tasks": tasks,
+        "external_tasks": external_all
+    })
 
 # รองรับ Deploy 
 if __name__ == '__main__':
