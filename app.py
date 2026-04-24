@@ -105,25 +105,19 @@ def external_tasks():
     if error:
         return jsonify({"error": {"code": error[1], "message": error[0]}}), error[1]
 
-    friend_apis = [
-        "https://mini-task-api-v2.onrender.com/",
-        "https://flask-api-mini.onrender.com/"
-    ]
+    friend_apis = {
+        "friend1": "https://mini-task-api-v2.onrender.com/public-tasks",
+        "friend2": "https://flask-api-mini.onrender.com/public-tasks"
+    }
 
-    external_all = []
+    external_all = {}
 
-    for url in friend_apis:
+    for name, url in friend_apis.items():
         try:
             res = requests.get(url, timeout=10)
-            data = res.json()
-            external_all.append(data)
+            external_all[name] = res.json()
         except:
-            external_all.append({"error": f"Cannot connect to {url}"})
-
-    return jsonify({
-        "my_tasks": tasks,
-        "external_tasks": external_all
-    })
+            external_all[name] = {"error": f"Cannot connect to {url}"}
 
 
 # รองรับ Deploy 
