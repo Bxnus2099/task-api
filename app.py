@@ -14,7 +14,29 @@ USER = {
 }
 
 # mock database
-tasks = []
+tasks = [
+    {
+        "id": 1,
+        "title": "ทำ Homework วิชา IE322",
+        "status": "pending",
+        "priority": "high",
+        "due_date": "2026-04-30"
+    },
+    {
+        "id": 2,
+        "title": "อ่านหนังสือสอบ Midterm",
+        "status": "pending",
+        "priority": "medium",
+        "due_date": "2026-05-05"
+    },
+    {
+        "id": 3,
+        "title": "ทำโปรเจค Mini Task API",
+        "status": "done",
+        "priority": "high",
+        "due_date": "2026-04-20"
+    }
+]
 
 # -----------------------------
 # 🔐 LOGIN
