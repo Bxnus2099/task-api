@@ -136,7 +136,14 @@ def external_tasks():
         try:
             res = requests.get(url, timeout=10)
             if res.status_code == 200:
-                external_all[name] = res.json()
+                data = res.json()
+                if "tasks" in data:
+                    external_all[name] = data["tasks"]
+                elif "data" in data:
+                    external_all[name] = data["data"]
+                else:
+                    external_all[name] = data
+
             else:
                 external_all[name] = {"error": f"{url} returned {res.status_code}"}
         except:
