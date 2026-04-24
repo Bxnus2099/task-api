@@ -83,7 +83,7 @@ def verify_token(req):
         return None, ("Invalid token", 401)
 
 
-#  GET TASKS (PRIVATE)
+#  GET TASKS 
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     user, error = verify_token(request)
@@ -123,7 +123,7 @@ def create_task():
     return jsonify({"message": "Task created"})
 
 
-# PUBLIC TASKS (สำคัญมาก!)
+# PUBLIC TASKS
 @app.route('/public-tasks', methods=['GET'])
 def public_tasks():
     return jsonify({"tasks": tasks})
